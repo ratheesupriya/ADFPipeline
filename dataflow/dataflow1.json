@@ -5,19 +5,86 @@
 		"typeProperties": {
 			"sources": [
 				{
-					"name": "source1"
+					"dataset": {
+						"referenceName": "Stage1_Sales_SAL_SWINVC_TB",
+						"type": "DatasetReference"
+					},
+					"name": "Stage1SalesSALSWINVCTB"
 				}
 			],
 			"sinks": [],
 			"transformations": [
 				{
-					"name": "derivedColumn1"
+					"name": "Transformation1"
 				}
 			],
 			"scriptLines": [
-				"source(allowSchemaDrift: true,",
-				"     validateSchema: false) ~> source1",
-				"source1 derive() ~> derivedColumn1"
+				"source(output(",
+				"          INVC_DLR_NO as string,",
+				"          INVC_NO as string,",
+				"          INVC_CORP_NO as string,",
+				"          INVC_CMPN_NO as string,",
+				"          INVC_TYPE as string,",
+				"          INVC_CNFM_YN as string,",
+				"          INVC_CNFM_DATE as string,",
+				"          INVC_DATE as string,",
+				"          INVC_INSR_YN as string,",
+				"          INVC_INSR_AMT as string,",
+				"          INVC_INSR_DATE as string,",
+				"          INVC_INSR_TYPE as string,",
+				"          INVC_INSR_NO as string,",
+				"          INVC_RGSTN_NO as string,",
+				"          INVC_RGSTN_DATE as string,",
+				"          INVC_DLVRY_DATE as string,",
+				"          INVC_ADDR1 as string,",
+				"          INVC_ADDR2 as string,",
+				"          INVC_ADDR3 as string,",
+				"          INVC_RGN_CODE as string,",
+				"          INVC_STCD_CODE as string,",
+				"          INVC_CITY_CODE as string,",
+				"          INVC_LCTN_CODE as string,",
+				"          INVC_PIN_CODE as string,",
+				"          INVC_CNCL_YN as string,",
+				"          INVC_CNCL_DATE as string,",
+				"          INVC_CNCL_RMRKS as string,",
+				"          INVC_BKNG_NO as string,",
+				"          INVC_CRTE_DTIME as string,",
+				"          INVC_CRTE_EMP_NO as string,",
+				"          INVC_UPDT_DTIME as string,",
+				"          INVC_UPDT_EMP_NO as string,",
+				"          INVC_ACTRL_USR_YN as string,",
+				"          INVC_DN_DATE as string,",
+				"          INVC_DLVRY_CNFM_YN as string,",
+				"          INVC_CC_REQ as string,",
+				"          INVC_CC_REASON as string,",
+				"          INVC_CC_RDATE as string,",
+				"          INVC_CC_RMRKS as string,",
+				"          INVC_CC_RA_YN as string,",
+				"          INVC_CC_STATUS as string,",
+				"          INVC_CC_REQ_VERSION as string,",
+				"          INVC_HMIL_EMP_CODE as string,",
+				"          INVC_ENQRY_NO as string,",
+				"          INVC_REGI_FILE_DOC_NO as string,",
+				"          INVC_DLVRY_FILE_DOC_NO as string,",
+				"          INVC_REGI_CUST_NO as string,",
+				"          INVC_REGI_RELAT_SHIP as string,",
+				"          INVC_VIN_NO as string,",
+				"          INVC_BASIC_PRCE as string,",
+				"          INVC_VRNT_PRCE as string,",
+				"          INVC_ADVNC_EMI as string,",
+				"          INVC_LOAN_AMT as string,",
+				"          INVC_WTYNLTY_CFC_YN as string,",
+				"          INVC_EQCR_SEQ as string,",
+				"          INVC_ALCN_DATE as string,",
+				"          INVC_SCHEME_YN as string,",
+				"          INVC_MYKIA as string,",
+				"          INVC_MYKIA_REG_DATE as string,",
+				"          INVC_MK_VINLINK_DT as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> Stage1SalesSALSWINVCTB",
+				"Stage1SalesSALSWINVCTB derive(IY = left(INVC_CNFM_DATE,4)) ~> Transformation1"
 			]
 		}
 	}
