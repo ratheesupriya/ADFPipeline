@@ -35,6 +35,9 @@
 				},
 				{
 					"name": "Renaming"
+				},
+				{
+					"name": "select2"
 				}
 			],
 			"scriptLines": [
@@ -138,7 +141,7 @@
 				"          Flag =  'Invoice',",
 				"          Delivery_Date = toString(toTimestamp(toString(byName('INVC_DLVRY_DATE')), 'dd-MM-yyyy') , 'dd/MM/yyyy')) ~> Transformation1",
 				"select1 filter(CMM_GRP_CODE=='DSS0011') ~> filter1",
-				"Transformation1, filter1 lookup(Stage1SalesSALSWINVCTB@INVC_TYPE == select1@INVC_TYPE,",
+				"Transformation1, select2 lookup(Stage1SalesSALSWINVCTB@INVC_TYPE == select2@INVC_TYPE,",
 				"     multiple: false,",
 				"     pickup: 'first',",
 				"     asc(CMM_CODE_NAME, false),",
@@ -207,12 +210,17 @@
 				"          IM,",
 				"          {\"Delivered/Not Delivered Flag\"},",
 				"          Flag,",
-				"          CMM_GRP_CODE,",
-				"          INVC_TYPE = select1@INVC_TYPE,",
+				"          INVC_TYPE = select2@INVC_TYPE,",
 				"          CMM_CODE_NAME",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> Renaming"
+				"     skipDuplicateMapOutputs: true) ~> Renaming",
+				"filter1 select(mapColumn(",
+				"          INVC_TYPE,",
+				"          CMM_CODE_NAME",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select2"
 			]
 		}
 	}
