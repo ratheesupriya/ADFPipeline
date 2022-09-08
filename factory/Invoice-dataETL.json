@@ -1,0 +1,9 @@
+{
+	"name": "Invoice-dataETL",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "8c10b55c-f15d-498d-bd4f-b82cfd224225",
+		"tenantId": "6b8a9a87-cf3a-46cc-b6fb-cfd185c73036"
+	}
+}

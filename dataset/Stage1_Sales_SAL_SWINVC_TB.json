@@ -1,0 +1,265 @@
+{
+	"name": "Stage1_Sales_SAL_SWINVC_TB",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Invoicelinkservices",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "Stage1_Sales_SAL_SWINVC_TB.csv",
+				"fileSystem": "inputinvoicedata"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "INVC_DLR_NO",
+				"type": "String"
+			},
+			{
+				"name": "INVC_NO",
+				"type": "String"
+			},
+			{
+				"name": "INVC_CORP_NO",
+				"type": "String"
+			},
+			{
+				"name": "INVC_CMPN_NO",
+				"type": "String"
+			},
+			{
+				"name": "INVC_TYPE",
+				"type": "String"
+			},
+			{
+				"name": "INVC_CNFM_YN",
+				"type": "String"
+			},
+			{
+				"name": "INVC_CNFM_DATE",
+				"type": "String"
+			},
+			{
+				"name": "INVC_DATE",
+				"type": "String"
+			},
+			{
+				"name": "INVC_INSR_YN",
+				"type": "String"
+			},
+			{
+				"name": "INVC_INSR_AMT",
+				"type": "String"
+			},
+			{
+				"name": "INVC_INSR_DATE",
+				"type": "String"
+			},
+			{
+				"name": "INVC_INSR_TYPE",
+				"type": "String"
+			},
+			{
+				"name": "INVC_INSR_NO",
+				"type": "String"
+			},
+			{
+				"name": "INVC_RGSTN_NO",
+				"type": "String"
+			},
+			{
+				"name": "INVC_RGSTN_DATE",
+				"type": "String"
+			},
+			{
+				"name": "INVC_DLVRY_DATE",
+				"type": "String"
+			},
+			{
+				"name": "INVC_ADDR1",
+				"type": "String"
+			},
+			{
+				"name": "INVC_ADDR2",
+				"type": "String"
+			},
+			{
+				"name": "INVC_ADDR3",
+				"type": "String"
+			},
+			{
+				"name": "INVC_RGN_CODE",
+				"type": "String"
+			},
+			{
+				"name": "INVC_STCD_CODE",
+				"type": "String"
+			},
+			{
+				"name": "INVC_CITY_CODE",
+				"type": "String"
+			},
+			{
+				"name": "INVC_LCTN_CODE",
+				"type": "String"
+			},
+			{
+				"name": "INVC_PIN_CODE",
+				"type": "String"
+			},
+			{
+				"name": "INVC_CNCL_YN",
+				"type": "String"
+			},
+			{
+				"name": "INVC_CNCL_DATE",
+				"type": "String"
+			},
+			{
+				"name": "INVC_CNCL_RMRKS",
+				"type": "String"
+			},
+			{
+				"name": "INVC_BKNG_NO",
+				"type": "String"
+			},
+			{
+				"name": "INVC_CRTE_DTIME",
+				"type": "String"
+			},
+			{
+				"name": "INVC_CRTE_EMP_NO",
+				"type": "String"
+			},
+			{
+				"name": "INVC_UPDT_DTIME",
+				"type": "String"
+			},
+			{
+				"name": "INVC_UPDT_EMP_NO",
+				"type": "String"
+			},
+			{
+				"name": "INVC_ACTRL_USR_YN",
+				"type": "String"
+			},
+			{
+				"name": "INVC_DN_DATE",
+				"type": "String"
+			},
+			{
+				"name": "INVC_DLVRY_CNFM_YN",
+				"type": "String"
+			},
+			{
+				"name": "INVC_CC_REQ",
+				"type": "String"
+			},
+			{
+				"name": "INVC_CC_REASON",
+				"type": "String"
+			},
+			{
+				"name": "INVC_CC_RDATE",
+				"type": "String"
+			},
+			{
+				"name": "INVC_CC_RMRKS",
+				"type": "String"
+			},
+			{
+				"name": "INVC_CC_RA_YN",
+				"type": "String"
+			},
+			{
+				"name": "INVC_CC_STATUS",
+				"type": "String"
+			},
+			{
+				"name": "INVC_CC_REQ_VERSION",
+				"type": "String"
+			},
+			{
+				"name": "INVC_HMIL_EMP_CODE",
+				"type": "String"
+			},
+			{
+				"name": "INVC_ENQRY_NO",
+				"type": "String"
+			},
+			{
+				"name": "INVC_REGI_FILE_DOC_NO",
+				"type": "String"
+			},
+			{
+				"name": "INVC_DLVRY_FILE_DOC_NO",
+				"type": "String"
+			},
+			{
+				"name": "INVC_REGI_CUST_NO",
+				"type": "String"
+			},
+			{
+				"name": "INVC_REGI_RELAT_SHIP",
+				"type": "String"
+			},
+			{
+				"name": "INVC_VIN_NO",
+				"type": "String"
+			},
+			{
+				"name": "INVC_BASIC_PRCE",
+				"type": "String"
+			},
+			{
+				"name": "INVC_VRNT_PRCE",
+				"type": "String"
+			},
+			{
+				"name": "INVC_ADVNC_EMI",
+				"type": "String"
+			},
+			{
+				"name": "INVC_LOAN_AMT",
+				"type": "String"
+			},
+			{
+				"name": "INVC_WTYNLTY_CFC_YN",
+				"type": "String"
+			},
+			{
+				"name": "INVC_EQCR_SEQ",
+				"type": "String"
+			},
+			{
+				"name": "INVC_ALCN_DATE",
+				"type": "String"
+			},
+			{
+				"name": "INVC_SCHEME_YN",
+				"type": "String"
+			},
+			{
+				"name": "INVC_MYKIA",
+				"type": "String"
+			},
+			{
+				"name": "INVC_MYKIA_REG_DATE",
+				"type": "String"
+			},
+			{
+				"name": "INVC_MK_VINLINK_DT",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

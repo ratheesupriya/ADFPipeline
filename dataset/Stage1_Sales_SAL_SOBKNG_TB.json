@@ -1,0 +1,349 @@
+{
+	"name": "Stage1_Sales_SAL_SOBKNG_TB",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Invoicelinkservices",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "Stage1_Sales_SAL_SOBKNG_TB.csv",
+				"fileSystem": "inputinvoicedata"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "BKNG_DLR_NO",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_NO",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_CORP_NO",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_CMPN_NO",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_DATE",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_MODEL_CODE",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_VRNT_CODE",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_COLOR_CODE",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_EXPCT_DLVRY_DATE",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_VRNT_PRICE",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_AMT",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_RCPT_TOTAL_AMT",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_RCPT_CMPLT_YN",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_ALCN_DATE",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_ALCN_VIN",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_FNCE_TYPE",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_FNCE_YN",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_FNCER_CODE",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_DSA_NAME",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_LOAN_AMT",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_TENOR_NMTHS",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_FILE_NO",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_DO_NO",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_DO_AMT",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_DO_DATE",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_IFA_AMT",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_INVGT_DATE",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_FLGN_DATE",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_PADS_DATE",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_FNLA_DATE",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_INVGT_STAT",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_CNCL_TYPE",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_CNCL_DATE",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_CNCL_RMRKS",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_ENQRY_NO",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_EMP_NO",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_CUST_NO",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_CRTE_DTIME",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_CRTE_EMP_NO",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_UPDT_DTIME",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_UPDT_EMP_NO",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_RADS_DATE",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_DO_ISSD_BY",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_DO_CMMT_PMNT_DATE",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_DO_ISSR_NAME",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_DBRS_DATE",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_EXPTD_DBRS_DATE",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_CMTD_DLVRY_DATE",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_RACK_RATE",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_DSA_CMSN",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_BRKR_PYMT_TYPE",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_BRKR_PYMT_AMT",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_SALE_TYPE",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_ADVNC_EMI",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_IFA_DATE",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_BASIC_PRICE",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_TAX_PRCNT",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_EDCE_PRCNT",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_HYPO_NAME",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_RFND_TOTAL_AMT",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_CGST_PRCNT",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_SGST_PRCNT",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_IGST_PRCNT",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_INTCOLOR_CODE",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_BILL_TO_NAME",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_BILL_TO_ADDR",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_BILL_TO_STATE",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_BILL_TO_CITY",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_BILL_TO_TEHSIL",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_BILL_TO_VILLAGE",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_BILL_TO_PIN",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_SHIP_TO_NAME",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_SHIP_TO_ADDR",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_SHIP_TO_STATE",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_SHIP_TO_CITY",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_SHIP_TO_TEHSIL",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_SHIP_TO_VILLAGE",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_SHIP_TO_PIN",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_FINCR_BRANCH_NM",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_RMRKS",
+				"type": "String"
+			},
+			{
+				"name": "BKNG_SRC_FLG",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
