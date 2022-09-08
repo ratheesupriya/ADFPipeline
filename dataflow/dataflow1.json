@@ -10,12 +10,22 @@
 						"type": "DatasetReference"
 					},
 					"name": "Stage1SalesSALSWINVCTB"
+				},
+				{
+					"dataset": {
+						"referenceName": "Stage1_Sales_AfterSales_CMM_CMCD_TB",
+						"type": "DatasetReference"
+					},
+					"name": "Stage1SalesAfterSalesCMMCMCDTB"
 				}
 			],
 			"sinks": [],
 			"transformations": [
 				{
 					"name": "Transformation1"
+				},
+				{
+					"name": "select1"
 				}
 			],
 			"scriptLines": [
@@ -84,7 +94,50 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> Stage1SalesSALSWINVCTB",
-				"Stage1SalesSALSWINVCTB derive(IY = left(INVC_CNFM_DATE,4)) ~> Transformation1"
+				"source(output(",
+				"          CMPN_NO as string,",
+				"          CORP_NO as string,",
+				"          CMM_GRP_CODE as string,",
+				"          CMM_CODE as string,",
+				"          CMM_CODE_NAME as string,",
+				"          REMARK_1 as string,",
+				"          REMARK_2 as string,",
+				"          REMARK_3 as string,",
+				"          REMARK_4 as string,",
+				"          REMARK_5 as string,",
+				"          USED_YN as string,",
+				"          PRIORITY as string,",
+				"          CRTE_EMP_NO as string,",
+				"          CRTE_DTIME as string,",
+				"          UPDT_EMP_NO as string,",
+				"          UPDT_DTIME as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> Stage1SalesAfterSalesCMMCMCDTB",
+				"Stage1SalesSALSWINVCTB derive(IY = left(INVC_CNFM_DATE,4),",
+				"          ID = right(INVC_CNFM_DATE,2),",
+				"          IM = substring(INVC_CNFM_DATE,6,2)) ~> Transformation1",
+				"Stage1SalesAfterSalesCMMCMCDTB select(mapColumn(",
+				"          CMPN_NO,",
+				"          CORP_NO,",
+				"          CMM_GRP_CODE,",
+				"          CMM_CODE,",
+				"          CMM_CODE_NAME,",
+				"          REMARK_1,",
+				"          REMARK_2,",
+				"          REMARK_3,",
+				"          REMARK_4,",
+				"          REMARK_5,",
+				"          USED_YN,",
+				"          PRIORITY,",
+				"          CRTE_EMP_NO,",
+				"          CRTE_DTIME,",
+				"          UPDT_EMP_NO,",
+				"          UPDT_DTIME",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1"
 			]
 		}
 	}
