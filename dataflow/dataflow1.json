@@ -138,7 +138,7 @@
 				"          ID = left(INVC_CNFM_DATE,2),",
 				"          IM = substring(INVC_CNFM_DATE,4,2),",
 				"          {\"Delivered/Not Delivered Flag\"} = iif(length(trim(INVC_DLVRY_DATE))<1,\"Not Delivered\",\"Delivered\"),",
-				"          Flag =  'Invoice',",
+				"          Flag = 'Invoice',",
 				"          Delivery_Date = toString(toTimestamp(toString(byName('INVC_DLVRY_DATE')), 'dd-MM-yyyy') , 'dd/MM/yyyy')) ~> Transformation1",
 				"select1 filter(CMM_GRP_CODE=='DSS0011') ~> filter1",
 				"Transformation1, select2 lookup(Stage1SalesSALSWINVCTB@INVC_TYPE == select2@INVC_TYPE,",
