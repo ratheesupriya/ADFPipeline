@@ -30,6 +30,13 @@
 						"referenceName": "Stage1_Sales_AfterSales_CMM_CMCD_TB",
 						"type": "DatasetReference"
 					},
+					"name": "Stage1SalesAfterSalesCMMCMCDTB2"
+				},
+				{
+					"dataset": {
+						"referenceName": "Stage1_Sales_Team_Leader",
+						"type": "DatasetReference"
+					},
 					"name": "source1"
 				}
 			],
@@ -58,6 +65,30 @@
 				},
 				{
 					"name": "filter2"
+				},
+				{
+					"name": "Transformation2"
+				},
+				{
+					"name": "lookup2"
+				},
+				{
+					"name": "select4"
+				},
+				{
+					"name": "Renaming2"
+				},
+				{
+					"name": "join1"
+				},
+				{
+					"name": "Transformation3"
+				},
+				{
+					"name": "Renaming3"
+				},
+				{
+					"name": "join2"
 				}
 			],
 			"scriptLines": [
@@ -253,6 +284,21 @@
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> Stage1SalesAfterSalesCMMCMCDTB2",
+				"source(output(",
+				"          TEAM_LEADER as string,",
+				"          TEAM_LEADER_JOINING_DATE as string,",
+				"          TEAM_LEADER_LEAVE_DATE as string,",
+				"          KEC as string,",
+				"          KEC_NAME as string,",
+				"          KEC_CODE as string,",
+				"          KEC_JOIN_DATE as string,",
+				"          KEC_LEAVE_DATE as string,",
+				"          EQRY_ENQRY_NO as string,",
+				"          EQRY_DLR_NO as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> source1",
 				"Stage1SalesAfterSalesCMMCMCDTB select(mapColumn(",
 				"          CMM_GRP_CODE,",
@@ -265,7 +311,8 @@
 				"          Flag = 'Invoice',",
 				"          Delivery_Date = toString(toTimestamp(toString(byName('INVC_DLVRY_DATE')), 'dd-MM-yyyy') , 'dd/MM/yyyy'),",
 				"          INVC_CNFM_DATE = iif(INVC_CNFM_DATE=='23-10-2010',replace(INVC_CNFM_DATE,'23-10-2010','23-10-2020'),INVC_CNFM_DATE ),",
-				"          Flag1 = 'Online') ~> Transformation1",
+				"          Flag1 = 'Online',",
+				"          INVC_BASIC_PRCE = substring(INVC_BASIC_PRCE,4,4)) ~> Transformation1",
 				"select1 filter(CMM_GRP_CODE=='DSS0011') ~> filter1",
 				"Transformation1, select2 lookup(Stage1SalesSALSWINVCTB@INVC_TYPE == select2@INVC_TYPE,",
 				"     multiple: false,",
@@ -323,7 +370,7 @@
 				"          INVC_REGI_FILE_DOC_NO,",
 				"          INVC_DLVRY_FILE_DOC_NO,",
 				"          INVC_REGI_RELAT_SHIP,",
-				"          INVC_BASIC_PRCE,",
+				"          INVC_BASIC_PRCE = Stage1SalesSALSWINVCTB@INVC_BASIC_PRCE,",
 				"          INVC_VRNT_PRCE,",
 				"          INVC_ADVNC_EMI,",
 				"          INVC_LOAN_AMT,",
@@ -344,14 +391,91 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select2",
-				"source1 select(mapColumn(",
+				"Stage1SalesAfterSalesCMMCMCDTB2 select(mapColumn(",
 				"          CMM_GRP_CODE,",
 				"          BKNG_FNCE_TYPE = CMM_CODE,",
 				"          CMM_CODE_NAME",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select3",
-				"select3 filter( CMM_GRP_CODE=='DSA0001') ~> filter2"
+				"select3 filter( CMM_GRP_CODE=='DSA0001') ~> filter2",
+				"Stage1SalesSALSOBKNGTB derive(BKNG_HYPO_NAME = iif(length(trim(BKNG_HYPO_NAME))<1,'Cash & Others',BKNG_HYPO_NAME)) ~> Transformation2",
+				"Transformation2, select4 lookup(Stage1SalesSALSOBKNGTB@BKNG_FNCE_TYPE == select4@BKNG_FNCE_TYPE,",
+				"     multiple: false,",
+				"     pickup: 'first',",
+				"     asc(CMM_CODE_NAME, false),",
+				"     broadcast: 'auto')~> lookup2",
+				"filter2 select(mapColumn(",
+				"          BKNG_FNCE_TYPE,",
+				"          CMM_CODE_NAME",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select4",
+				"lookup2 select(mapColumn(",
+				"          {Dealer_No.} = BKNG_DLR_NO,",
+				"          {Dealer_No.} = BKNG_NO,",
+				"          {Corporation_No.} = BKNG_CORP_NO,",
+				"          {Company_No.} = BKNG_CMPN_NO,",
+				"          BKNG_DATE,",
+				"          Model_Code = BKNG_MODEL_CODE,",
+				"          TRIM_Code = BKNG_VRNT_CODE,",
+				"          {Ext.Colour_Code} = BKNG_COLOR_CODE,",
+				"          BKNG_EXPCT_DLVRY_DATE,",
+				"          Ex_Showroom_Price = BKNG_VRNT_PRICE,",
+				"          BKNG_AMT,",
+				"          BKNG_RCPT_TOTAL_AMT,",
+				"          BKNG_ALCN_DATE,",
+				"          BKNG_ALCN_VIN,",
+				"          BKNG_FNCE_TYPE = Stage1SalesSALSOBKNGTB@BKNG_FNCE_TYPE,",
+				"          BKNG_DSA_NAME,",
+				"          BKNG_CNCL_TYPE,",
+				"          BKNG_CNCL_DATE,",
+				"          {Link_Enquiry_No.} = BKNG_ENQRY_NO,",
+				"          BKNG_EMP_NO,",
+				"          BKNG_CRTE_DTIME,",
+				"          BKNG_CRTE_EMP_NO,",
+				"          BKNG_CMTD_DLVRY_DATE,",
+				"          Basic_Price = BKNG_BASIC_PRICE,",
+				"          {Int.Colour_Code} = BKNG_INTCOLOR_CODE,",
+				"          BKNG_BILL_TO_STATE,",
+				"          BKNG_BILL_TO_CITY,",
+				"          BKNG_BILL_TO_TEHSIL,",
+				"          BKNG_BILL_TO_VILLAGE,",
+				"          BKNG_FNCE_TYPE = select4@BKNG_FNCE_TYPE,",
+				"          CMM_CODE_NAME",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> Renaming2",
+				"Renaming, Renaming2 join(Renaming@{Dealer_No.} == Renaming2@{Dealer_No.},",
+				"     joinType:'left',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join1",
+				"source1 derive(Team_Leader_Name = upper(split(TEAM_LEADER, ';')[2]),",
+				"          Team_Leader_Code = split('TEAM_LEADER',';')[1],",
+				"          {\"Active/Inactive\"} = upper(split(TEAM_LEADER,';')[3]),",
+				"          KEC = upper(KEC_NAME)) ~> Transformation3",
+				"Transformation3 select(mapColumn(",
+				"          TEAM_LEADER,",
+				"          KEC_Short_Code = KEC,",
+				"          KEC_NAME,",
+				"          KEC_Long_Code = KEC_CODE,",
+				"          TEAM_LEADER_LEAVE_DATE,",
+				"          KEC_JOIN_DATE,",
+				"          KEC_LEAVE_DATE,",
+				"          {Link_Enquiry_No.} = EQRY_ENQRY_NO,",
+				"          {Dealer_No.} = EQRY_DLR_NO,",
+				"          Team_Leader_Name,",
+				"          Team_Leader_Code,",
+				"          {\"Active/Inactive\"}",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> Renaming3",
+				"Renaming2, Renaming3 join(Renaming2@{Dealer_No.} == Renaming3@{Dealer_No.},",
+				"     joinType:'left',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join2"
 			]
 		}
 	}
