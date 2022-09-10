@@ -398,7 +398,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select3",
-				"select3 filter( CMM_GRP_CODE=='DSA0001') ~> filter2",
+				"select3 filter(CMM_GRP_CODE=='DSA0001') ~> filter2",
 				"Stage1SalesSALSOBKNGTB derive(BKNG_HYPO_NAME = iif(length(trim(BKNG_HYPO_NAME))<1,'Cash & Others',BKNG_HYPO_NAME)) ~> Transformation2",
 				"Transformation2, select4 lookup(Stage1SalesSALSOBKNGTB@BKNG_FNCE_TYPE == select4@BKNG_FNCE_TYPE,",
 				"     multiple: false,",
