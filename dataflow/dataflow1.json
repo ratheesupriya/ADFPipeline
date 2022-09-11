@@ -137,9 +137,6 @@
 					"name": "Renaming3"
 				},
 				{
-					"name": "join2"
-				},
-				{
 					"name": "Transformation4"
 				},
 				{
@@ -194,13 +191,13 @@
 					"name": "lookup7"
 				},
 				{
-					"name": "select14"
+					"name": "Renaming4"
 				},
 				{
-					"name": "select15"
+					"name": "Renaming5"
 				},
 				{
-					"name": "select16"
+					"name": "join5"
 				}
 			],
 			"scriptLines": [
@@ -782,11 +779,6 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> Renaming3",
-				"Renaming2, Renaming3 join(Renaming2@{Dealer_No.} == Renaming3@{Dealer_No.},",
-				"     joinType:'left',",
-				"     matchType:'exact',",
-				"     ignoreSpaces: false,",
-				"     broadcast: 'auto')~> join2",
 				"Stage1SalesAfterSalesCRMSCEQRY derive(Enquiry_Date1 = toString(toTimestamp(toString(byName('EQRY_DATE')), 'yyyy-MM-dd') , 'dd/MM/yyyy'),",
 				"          Key1 = concat(EQRY_ENQRY_NO,'|',EQRY_DLR_NO),",
 				"          Enquiry_Source_Type = iif(EQRY_SRC_FLG=='MOB','MySales',iif(length(EQRY_SR_NUM_REAL)>0,'Online','DMS'))) ~> Transformation4",
@@ -857,15 +849,16 @@
 				"     pickup: 'first',",
 				"     asc(CMM_CODE_NAME, false),",
 				"     broadcast: 'auto')~> lookup7",
-				"select16 select(mapColumn(",
+				"lookup7 select(mapColumn(",
 				"          {Dealer_No.} = EQRY_DLR_NO,",
 				"          {Link_Enquiry_No.} = EQRY_ENQRY_NO,",
 				"          {Corporation_No.} = EQRY_CORP_NO,",
 				"          {Company_No.} = EQRY_CMPN_NO,",
 				"          link_date = EQRY_DATE,",
+				"          Key1,",
 				"          EQRY_SRC_CODE,",
-				"          EQRY_STAT,",
-				"          EQRY_TYPE,",
+				"          EQRY_STAT = Stage1SalesAfterSalesCRMSCEQRY@EQRY_STAT,",
+				"          EQRY_TYPE = Stage1SalesAfterSalesCRMSCEQRY@EQRY_TYPE,",
 				"          EQRY_FNCE_YN,",
 				"          EQRY_EXCHG_YN,",
 				"          EQRY_EXCHG_SRC_CODE,",
@@ -889,7 +882,7 @@
 				"          Enquiry_Category_Type = select13@CMM_CODE_NAME",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select14",
+				"     skipDuplicateMapOutputs: true) ~> Renaming4",
 				"source1 select(mapColumn(",
 				"          {Dealer_No.} = EQCR_DLR_NO,",
 				"          {Link_Enquiry_No.} = EQCR_ENQRY_NO,",
@@ -903,13 +896,12 @@
 				"          EQCR_EXPECTED_PRICE",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select15",
-				"lookup7 select(mapColumn(",
-				"          each(match(/* All input columns */ true()),",
-				"               /* Input name */ $$ = $$)",
-				"     ),",
-				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select16"
+				"     skipDuplicateMapOutputs: true) ~> Renaming5",
+				"join1, Renaming3 join(Renaming2@{Dealer_No.} == Renaming3@{Dealer_No.},",
+				"     joinType:'left',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join5"
 			]
 		}
 	}
