@@ -1,0 +1,100 @@
+{
+	"name": "Stage1_Sales_CRM_SCEQCR_TB",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "Stage1_Sales_CRM_SCEQCR_TB.csv",
+				"fileSystem": "inputinvoicedata"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "EQCR_DLR_NO",
+				"type": "String"
+			},
+			{
+				"name": "EQCR_ENQRY_NO",
+				"type": "String"
+			},
+			{
+				"name": "EQCR_SEQ",
+				"type": "String"
+			},
+			{
+				"name": "EQCR_CORP_NO",
+				"type": "String"
+			},
+			{
+				"name": "EQCR_CMPN_NO",
+				"type": "String"
+			},
+			{
+				"name": "EQCR_MODEL_CODE",
+				"type": "String"
+			},
+			{
+				"name": "EQCR_VRNT_CODE",
+				"type": "String"
+			},
+			{
+				"name": "EQCR_COLOR_CODE",
+				"type": "String"
+			},
+			{
+				"name": "EQCR_QTY",
+				"type": "String"
+			},
+			{
+				"name": "EQCR_CRTE_DTIME",
+				"type": "String"
+			},
+			{
+				"name": "EQCR_CRTE_EMP_NO",
+				"type": "String"
+			},
+			{
+				"name": "EQCR_UPDT_DTIME",
+				"type": "String"
+			},
+			{
+				"name": "EQCR_UPDT_EMP_NO",
+				"type": "String"
+			},
+			{
+				"name": "EQCR_INTCOLOR_CODE",
+				"type": "String"
+			},
+			{
+				"name": "EQCR_MAKER_CODE",
+				"type": "String"
+			},
+			{
+				"name": "EQCR_INT_COLOR_CODE",
+				"type": "String"
+			},
+			{
+				"name": "EQCR_QUOTED_PRICE",
+				"type": "String"
+			},
+			{
+				"name": "EQCR_EXPECTED_PRICE",
+				"type": "String"
+			},
+			{
+				"name": "EQCR_FUEL_TYPE",
+				"type": "String"
+			}
+		]
+	}
+}

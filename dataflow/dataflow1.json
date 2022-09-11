@@ -80,6 +80,13 @@
 						"type": "DatasetReference"
 					},
 					"name": "Stage1SalesAfterSalesCMMCMCDTB3"
+				},
+				{
+					"dataset": {
+						"referenceName": "Stage1_Sales_CRM_SCEQCR_TB",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
 				}
 			],
 			"sinks": [],
@@ -203,6 +210,9 @@
 				},
 				{
 					"name": "select14"
+				},
+				{
+					"name": "select15"
 				}
 			],
 			"scriptLines": [
@@ -592,6 +602,30 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> Stage1SalesAfterSalesCMMCMCDTB3",
+				"source(output(",
+				"          EQCR_DLR_NO as string,",
+				"          EQCR_ENQRY_NO as string,",
+				"          EQCR_SEQ as string,",
+				"          EQCR_CORP_NO as string,",
+				"          EQCR_CMPN_NO as string,",
+				"          EQCR_MODEL_CODE as string,",
+				"          EQCR_VRNT_CODE as string,",
+				"          EQCR_COLOR_CODE as string,",
+				"          EQCR_QTY as string,",
+				"          EQCR_CRTE_DTIME as string,",
+				"          EQCR_CRTE_EMP_NO as string,",
+				"          EQCR_UPDT_DTIME as string,",
+				"          EQCR_UPDT_EMP_NO as string,",
+				"          EQCR_INTCOLOR_CODE as string,",
+				"          EQCR_MAKER_CODE as string,",
+				"          EQCR_INT_COLOR_CODE as string,",
+				"          EQCR_QUOTED_PRICE as string,",
+				"          EQCR_EXPECTED_PRICE as string,",
+				"          EQCR_FUEL_TYPE as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> source1",
 				"Stage1SalesAfterSalesCMMCMCDTB select(mapColumn(",
 				"          CMM_GRP_CODE,",
 				"          INVC_TYPE = CMM_CODE,",
@@ -1207,7 +1241,21 @@
 				"          Enquiry_Category_Type = CMM_CODE_NAME",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select14"
+				"     skipDuplicateMapOutputs: true) ~> select14",
+				"source1 select(mapColumn(",
+				"          {Dealer_No.} = EQCR_DLR_NO,",
+				"          {Link_Enquiry_No.} = EQCR_ENQRY_NO,",
+				"          EQCR_SEQ,",
+				"          corp = EQCR_CORP_NO,",
+				"          comp = EQCR_CMPN_NO,",
+				"          { EQCR_QTY} = EQCR_QTY,",
+				"          EQCR_CRTE_DTIME,",
+				"          EQCR_CRTE_EMP_NO,",
+				"          EQCR_QUOTED_PRICE,",
+				"          EQCR_EXPECTED_PRICE",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select15"
 			]
 		}
 	}
