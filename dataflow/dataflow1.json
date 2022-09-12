@@ -219,6 +219,9 @@
 				},
 				{
 					"name": "join7"
+				},
+				{
+					"name": "select19"
 				}
 			],
 			"scriptLines": [
@@ -884,7 +887,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> Renaming5",
-				"join1, Renaming3 join(Renaming2@{Dealer_No.} == Renaming3@{Dealer_No.},",
+				"select19, Renaming3 join(Renaming2@{Dealer_No.} == Renaming3@{Dealer_No.},",
 				"     joinType:'left',",
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
@@ -980,7 +983,13 @@
 				"     joinType:'left',",
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
-				"     broadcast: 'auto')~> join7"
+				"     broadcast: 'auto')~> join7",
+				"join1 select(mapColumn(",
+				"          each(match(/* All input columns */ true()),",
+				"               /* Input name */ $$ = $$)",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select19"
 			]
 		}
 	}
