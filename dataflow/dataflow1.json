@@ -51,7 +51,7 @@
 						"referenceName": "Stage1_Sales_CRM_SDENSC_TB",
 						"type": "DatasetReference"
 					},
-					"name": "CRMSDENSC"
+					"name": "CRMCRMSDENSC"
 				},
 				{
 					"dataset": {
@@ -554,7 +554,7 @@
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> CRMSDENSC",
+				"     ignoreNoFilesFound: false) ~> CRMCRMSDENSC",
 				"source(output(",
 				"          ENSC_CMPN_NO as string,",
 				"          ENSC_CORP_NO as string,",
@@ -834,7 +834,7 @@
 				"     pickup: 'first',",
 				"     asc(Enquiry_Sub_Source_Name, false),",
 				"     broadcast: 'auto')~> lookup3",
-				"CRMSDENSC select(mapColumn(",
+				"CRMCRMSDENSC select(mapColumn(",
 				"          ENSC_GRP_CODE,",
 				"          EQRY_SUB_SRC_CODE = ENSC_CODE,",
 				"          ENSC_NAME",
