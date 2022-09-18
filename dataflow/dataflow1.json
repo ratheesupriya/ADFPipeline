@@ -89,7 +89,15 @@
 					"name": "Stage1SalesCRMSCEQCRTB"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "datatypechange",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
 			"transformations": [
 				{
 					"name": "select1"
@@ -246,6 +254,9 @@
 				},
 				{
 					"name": "select23"
+				},
+				{
+					"name": "select24"
 				}
 			],
 			"scriptLines": [
@@ -736,7 +747,8 @@
 				"          {\"Delivered/Not Delivered Flag\"},",
 				"          Flag,",
 				"          INVC_TYPE = select2@INVC_TYPE,",
-				"          { \"Invoice_Type Name\"} = CMM_CODE_NAME",
+				"          { \"Invoice_Type Name\"} = CMM_CODE_NAME,",
+				"          Delivery_Date",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> Renaming",
@@ -1046,7 +1058,8 @@
 				"          BKNG_BILL_TO_TEHSIL,",
 				"          BKNG_BILL_TO_VILLAGE,",
 				"          {\"Financer Name\"},",
-				"          {Dealer_No.} = Renaming@{Dealer_No.}",
+				"          {Dealer_No.} = Renaming@{Dealer_No.},",
+				"          Delivery_Date",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select19",
@@ -1141,7 +1154,8 @@
 				"          {Dealer_No.} = select19@{Dealer_No.},",
 				"          Team_Leader_Name,",
 				"          Team_Leader_Code,",
-				"          {\"Active/Inactive\"}",
+				"          {\"Active/Inactive\"},",
+				"          Delivery_Date",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select20",
@@ -1312,7 +1326,8 @@
 				"          CMM_GRP_CODE,",
 				"          Enquiry_Status,",
 				"          Enquiry_Type2,",
-				"          Enquiry_Category_Type",
+				"          Enquiry_Category_Type,",
+				"          Delivery_Date",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select22",
@@ -1423,10 +1438,70 @@
 				"          EQCR_CRTE_DTIME,",
 				"          EQCR_CRTE_EMP_NO,",
 				"          EQCR_QUOTED_PRICE,",
-				"          EQCR_EXPECTED_PRICE",
+				"          EQCR_EXPECTED_PRICE,",
+				"          Delivery_Date",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select23"
+				"     skipDuplicateMapOutputs: true) ~> select23",
+				"select23 select(mapColumn(",
+				"          {Invoice_No.},",
+				"          {Corporation_No.},",
+				"          {Company_No.},",
+				"          INVC_TYPE,",
+				"          INVC_CNFM_YN,",
+				"          INVC_CNFM_DATE,",
+				"          INVC_DATE,",
+				"          INVC_DLVRY_DATE,",
+				"          { Booking_No.},",
+				"          INVC_CRTE_DTIME,",
+				"          {Link_Enquiry_No.},",
+				"          {\"Delivered/Not Delivered Flag\"},",
+				"          Flag,",
+				"          { \"Invoice_Type Name\"},",
+				"          Join_key,",
+				"          BKNG_DATE,",
+				"          Model_Code,",
+				"          TRIM_Code,",
+				"          BKNG_EXPCT_DLVRY_DATE,",
+				"          BKNG_AMT,",
+				"          BKNG_CNCL_DATE,",
+				"          BKNG_CRTE_DTIME,",
+				"          BKNG_CMTD_DLVRY_DATE,",
+				"          BKNG_BILL_TO_STATE,",
+				"          BKNG_BILL_TO_CITY,",
+				"          TEAM_LEADER,",
+				"          KEC_NAME,",
+				"          TEAM_LEADER_LEAVE_DATE,",
+				"          KEC_JOIN_DATE,",
+				"          KEC_LEAVE_DATE,",
+				"          {Dealer_No.},",
+				"          Team_Leader_Name,",
+				"          Team_Leader_Code,",
+				"          {\"Active/Inactive\"},",
+				"          link_date,",
+				"          EQRY_STAT,",
+				"          EQRY_TYPE,",
+				"          EQRY_EMP_NO,",
+				"          Enquiry_Date1,",
+				"          Key1,",
+				"          Enquiry_Sub_Source_Name,",
+				"          Enquiry_Source,",
+				"          CMM_GRP_CODE,",
+				"          Enquiry_Status,",
+				"          Enquiry_Type2,",
+				"          Enquiry_Category_Type,",
+				"          { EQCR_QTY},",
+				"          Delivery_Date",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select24",
+				"select24 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink1"
 			]
 		}
 	}
