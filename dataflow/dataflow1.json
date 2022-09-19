@@ -1500,7 +1500,7 @@
 				"          Delivery_Date,",
 				"          TEAM_LEADER_JOINING_DATE,",
 				"          Lead_Source_Type = Enquiry_Source_Type,",
-				"          BKNG_HYPO_NAME",
+				"          ORD_HYPO_NAME = BKNG_HYPO_NAME",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select24",
