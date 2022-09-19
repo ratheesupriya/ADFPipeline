@@ -95,7 +95,11 @@
 						"referenceName": "Final_Invoice_ETL",
 						"type": "DatasetReference"
 					},
-					"name": "sink1"
+					"name": "sink1",
+					"rejectedDataLinkedService": {
+						"referenceName": "AzureDataLakeStorage1",
+						"type": "LinkedServiceReference"
+					}
 				}
 			],
 			"transformations": [
@@ -1610,11 +1614,13 @@
 				"          EQCR_QUOTED_PRICE as string,",
 				"          EQCR_EXPECTED_PRICE as string",
 				"     ),",
+				"     partitionFileNames:['Final_lnvoice_ETL.csv'],",
 				"     umask: 0022,",
 				"     preCommands: [],",
 				"     postCommands: [],",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> sink1"
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> sink1"
 			]
 		}
 	}
