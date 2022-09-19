@@ -1462,7 +1462,7 @@
 				"          {Company_No.},",
 				"          INVC_TYPE,",
 				"          INVC_CNFM_DATE,",
-				"          INVC_DATE,",
+				"          Invoice_Date = INVC_DATE,",
 				"          INVC_DLVRY_DATE,",
 				"          {Order_No.} = { Booking_No.},",
 				"          {Link_Enquiry_No.},",
