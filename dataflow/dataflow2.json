@@ -3,84 +3,11 @@
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
-			"sources": [
-				{
-					"name": "source1"
-				}
-			],
-			"sinks": [
-				{
-					"dataset": {
-						"referenceName": "InvoiceETL",
-						"type": "DatasetReference"
-					},
-					"name": "sink1"
-				}
-			],
+			"sources": [],
+			"sinks": [],
 			"transformations": [],
 			"scriptLines": [
-				"source(output(",
-				"          {Invoice_No.} as string,",
-				"          {Corporation_No.} as string,",
-				"          {Company_No.} as string,",
-				"          INVC_TYPE as string,",
-				"          INVC_CNFM_DATE as date,",
-				"          Invoice_Date as date,",
-				"          INVC_DLVRY_DATE as date,",
-				"          {Order_No.} as string,",
-				"          {Link_Enquiry_No.} as string,",
-				"          {\"Delivered/Not Delivered Flag\"} as string,",
-				"          Flag as string,",
-				"          { \"Invoice_Type Name\"} as string,",
-				"          Join_key as string,",
-				"          BKNG_DATE as date,",
-				"          Model_Code as string,",
-				"          TRIM_Code as double,",
-				"          BKNG_EXPCT_DLVRY_DATE as date,",
-				"          BKNG_AMT as double,",
-				"          BKNG_CNCL_DATE as date,",
-				"          BKNG_CRTE_DTIME as date,",
-				"          BKNG_BILL_TO_STATE as string,",
-				"          BKNG_BILL_TO_CITY as string,",
-				"          TEAM_LEADER as string,",
-				"          KEC_NAME as string,",
-				"          TEAM_LEADER_LEAVE_DATE as date,",
-				"          KEC_JOIN_DATE as date,",
-				"          KEC_LEAVE_DATE as timestamp,",
-				"          {Trader No.} as string,",
-				"          Team_Leader_Name as string,",
-				"          Team_Leader_Code as string,",
-				"          {\"Active/Inactive\"} as string,",
-				"          link_date as date,",
-				"          Lead_STAT as string,",
-				"          Lead_TYPE as string,",
-				"          Key1 as string,",
-				"          Lead_Sub_Source_Name as string,",
-				"          Lead_Source as string,",
-				"          Lead_Status as string,",
-				"          Lead_Category_Type as string,",
-				"          Lead_QTY as integer,",
-				"          Delivery_Date as string,",
-				"          TEAM_LEADER_JOINING_DATE as date,",
-				"          Lead_Source_Type as string,",
-				"          ORD_HYPO_NAME as string",
-				"     ),",
-				"     allowSchemaDrift: true,",
-				"     validateSchema: false) ~> source1",
-				"source1 sink(allowSchemaDrift: true,",
-				"     validateSchema: false,",
-				"     deletable:false,",
-				"     insertable:true,",
-				"     updateable:false,",
-				"     upsertable:false,",
-				"     recreate:true,",
-				"     format: 'table',",
-				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true,",
-				"     errorHandlingOption: 'stopOnFirstError',",
-				"     partitionBy('hash', 1),",
-				"     preCommands: [],",
-				"     postCommands: []) ~> sink1"
+				""
 			]
 		}
 	}
