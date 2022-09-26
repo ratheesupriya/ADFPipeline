@@ -261,6 +261,9 @@
 				},
 				{
 					"name": "select24"
+				},
+				{
+					"name": "derivedColumn1"
 				}
 			],
 			"scriptLines": [
@@ -1498,7 +1501,9 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select24",
-				"select24 sink(allowSchemaDrift: true,",
+				"select24 derive(ORD_EXPCT_DLVRY_DATE = toString(toTimestamp(toString(byName('ORD_EXPCT_DLVRY_DATE')), 'yyyyMMdd') , 'yyyy/MM/dd'),",
+				"          ORD_Cncl_Date = toString(toTimestamp(toString(byName('ORD_Cncl_Date')), 'yyyyMMdd') , 'yyyy/MM/dd')) ~> derivedColumn1",
+				"derivedColumn1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     partitionFileNames:['Invoice_Table.csv'],",
 				"     umask: 0022,",
