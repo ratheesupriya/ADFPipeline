@@ -2225,6 +2225,9 @@
 						},
 						{
 							"name": "select24"
+						},
+						{
+							"name": "derivedColumn1"
 						}
 					],
 					"scriptLines": [
@@ -3462,7 +3465,9 @@
 						"     ),",
 						"     skipDuplicateMapInputs: true,",
 						"     skipDuplicateMapOutputs: true) ~> select24",
-						"select24 sink(allowSchemaDrift: true,",
+						"select24 derive(ORD_EXPCT_DLVRY_DATE = toString(toTimestamp(toString(byName('ORD_EXPCT_DLVRY_DATE')), 'yyyyMMdd') , 'yyyy/MM/dd'),",
+						"          ORD_Cncl_Date = toString(toTimestamp(toString(byName('ORD_Cncl_Date')), 'yyyyMMdd') , 'yyyy/MM/dd')) ~> derivedColumn1",
+						"derivedColumn1 sink(allowSchemaDrift: true,",
 						"     validateSchema: false,",
 						"     partitionFileNames:['Invoice_Table.csv'],",
 						"     umask: 0022,",
@@ -3488,6 +3493,187 @@
 				"[concat(variables('factoryId'), '/datasets/Stage1SalesAfterSalesCMMCMCDTB3')]",
 				"[concat(variables('factoryId'), '/datasets/Stage1SalesCRMSCEQCRTB')]",
 				"[concat(variables('factoryId'), '/datasets/Invoice_Table')]",
+				"[concat(variables('factoryId'), '/linkedServices/Invoicelinkservices')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Invoice_Table_ETL')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Invoicelinkservices",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "Invoice_Table.csv",
+						"fileSystem": "outputinvoicedata"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "Invoice_No.",
+						"type": "String"
+					},
+					{
+						"name": "Corporation_No.",
+						"type": "String"
+					},
+					{
+						"name": "Company_No.",
+						"type": "String"
+					},
+					{
+						"name": "INVC_TYPE",
+						"type": "String"
+					},
+					{
+						"name": "Invoice_Confirmation_No.",
+						"type": "String"
+					},
+					{
+						"name": "Invoice_Date",
+						"type": "String"
+					},
+					{
+						"name": "Order_No.",
+						"type": "String"
+					},
+					{
+						"name": "Lead_No",
+						"type": "String"
+					},
+					{
+						"name": "\"Delivered/Not Delivered Flag\"",
+						"type": "String"
+					},
+					{
+						"name": "Flag",
+						"type": "String"
+					},
+					{
+						"name": " \"Invoice_Type Name\"",
+						"type": "String"
+					},
+					{
+						"name": "Order_Date",
+						"type": "String"
+					},
+					{
+						"name": "Model_Code",
+						"type": "String"
+					},
+					{
+						"name": "TRIM_Code",
+						"type": "String"
+					},
+					{
+						"name": "ORD_EXPCT_DLVRY_DATE",
+						"type": "String"
+					},
+					{
+						"name": "Order_Amt",
+						"type": "String"
+					},
+					{
+						"name": "ORD_Cncl_Date",
+						"type": "String"
+					},
+					{
+						"name": "ORD_BILL_TO_STATE",
+						"type": "String"
+					},
+					{
+						"name": "ORD_BILL_TO_CITY",
+						"type": "String"
+					},
+					{
+						"name": "TEAM_LEADER",
+						"type": "String"
+					},
+					{
+						"name": "Trader No.",
+						"type": "String"
+					},
+					{
+						"name": "Team_Leader_Name",
+						"type": "String"
+					},
+					{
+						"name": "Team_Leader_Code",
+						"type": "String"
+					},
+					{
+						"name": "\"Active/Inactive\"",
+						"type": "String"
+					},
+					{
+						"name": "link_date",
+						"type": "String"
+					},
+					{
+						"name": "Lead_STAT",
+						"type": "String"
+					},
+					{
+						"name": "Lead_TYPE",
+						"type": "String"
+					},
+					{
+						"name": "Lead_Sub_Source_Name",
+						"type": "String"
+					},
+					{
+						"name": "Lead_Source",
+						"type": "String"
+					},
+					{
+						"name": "Lead_Status",
+						"type": "String"
+					},
+					{
+						"name": "Lead_Category_Type",
+						"type": "String"
+					},
+					{
+						"name": "Lead_QTY",
+						"type": "String"
+					},
+					{
+						"name": "Delivery_Date",
+						"type": "String"
+					},
+					{
+						"name": "Lead_Source_Type",
+						"type": "String"
+					},
+					{
+						"name": "ORD_HYPO_NAME",
+						"type": "String"
+					},
+					{
+						"name": "Price",
+						"type": "String"
+					},
+					{
+						"name": "INVC_CRTE_DTIME",
+						"type": "String"
+					},
+					{
+						"name": "INVC_CRTE_EMP_NO",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/Invoicelinkservices')]"
 			]
 		}
