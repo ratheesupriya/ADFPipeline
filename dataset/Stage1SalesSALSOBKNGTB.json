@@ -1,6 +1,10 @@
 {
-	"name": "Stage1_Sales_SAL_SOBKNG_TB",
+	"name": "Stage1SalesSALSOBKNGTB",
 	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Invoicelinkservices",
+			"type": "LinkedServiceReference"
+		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {

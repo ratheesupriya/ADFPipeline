@@ -1,6 +1,10 @@
 {
-	"name": "Stage1_Sales_CRM_SDENSC_TB",
+	"name": "CMMCRMSDENSC",
 	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Invoicelinkservices",
+			"type": "LinkedServiceReference"
+		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {

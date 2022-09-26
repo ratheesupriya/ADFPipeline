@@ -6,84 +6,84 @@
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "Stage1_Sales_SAL_SWINVC_TB",
+						"referenceName": "Stage1SalesSALSWINVCTB",
 						"type": "DatasetReference"
 					},
 					"name": "Stage1SalesSALSWINVCTB"
 				},
 				{
 					"dataset": {
-						"referenceName": "Stage1_Sales_AfterSales_CMM_CMCD_TB",
+						"referenceName": "Stage1SalesAfterSalesCMMCMCDTB",
 						"type": "DatasetReference"
 					},
 					"name": "Stage1SalesAfterSalesCMMCMCDTB"
 				},
 				{
 					"dataset": {
-						"referenceName": "Stage1_Sales_SAL_SOBKNG_TB",
+						"referenceName": "Stage1SalesSALSOBKNGTB",
 						"type": "DatasetReference"
 					},
 					"name": "Stage1SalesSALSOBKNGTB"
 				},
 				{
 					"dataset": {
-						"referenceName": "Stage1_Sales_AfterSales_CMM_CMCD_TB",
+						"referenceName": "Stage1SalesAfterSalesCMMCMCDTB2TB",
 						"type": "DatasetReference"
 					},
 					"name": "Stage1SalesAfterSalesCMMCMCDTB2TB"
 				},
 				{
 					"dataset": {
-						"referenceName": "Stage1_Sales_Team_Leader",
+						"referenceName": "SalesTeamLeader",
 						"type": "DatasetReference"
 					},
 					"name": "SalesTeamLeader"
 				},
 				{
 					"dataset": {
-						"referenceName": "Stage1_Sales_AfterSales_CRM_SCEQRY_TB",
+						"referenceName": "Stage1SalesAfterSalesCRMSCEQRY",
 						"type": "DatasetReference"
 					},
 					"name": "Stage1SalesAfterSalesCRMSCEQRY"
 				},
 				{
 					"dataset": {
-						"referenceName": "Stage1_Sales_CRM_SDENSC_TB",
+						"referenceName": "CMMCRMSDENSC",
 						"type": "DatasetReference"
 					},
 					"name": "CMMCRMSDENSC"
 				},
 				{
 					"dataset": {
-						"referenceName": "Stage1_Sales_CRM_SDENSC_TB",
+						"referenceName": "CRMSDENSC1",
 						"type": "DatasetReference"
 					},
 					"name": "CRMSDENSC1"
 				},
 				{
 					"dataset": {
-						"referenceName": "Stage1_Sales_AfterSales_CMM_CMCD_TB",
+						"referenceName": "AfterSalesCMMCMCDTB",
 						"type": "DatasetReference"
 					},
 					"name": "AfterSalesCMMCMCDTB"
 				},
 				{
 					"dataset": {
-						"referenceName": "Stage1_Sales_AfterSales_CMM_CMCD_TB",
+						"referenceName": "StageSalesAfterSalesCMMCMCDTB2",
 						"type": "DatasetReference"
 					},
 					"name": "StageSalesAfterSalesCMMCMCDTB2"
 				},
 				{
 					"dataset": {
-						"referenceName": "Stage1_Sales_AfterSales_CMM_CMCD_TB",
+						"referenceName": "Stage1SalesAfterSalesCMMCMCDTB3",
 						"type": "DatasetReference"
 					},
 					"name": "Stage1SalesAfterSalesCMMCMCDTB3"
 				},
 				{
 					"dataset": {
-						"referenceName": "Stage1_Sales_CRM_SCEQCR_TB",
+						"referenceName": "Stage1SalesCRMSCEQCRTB",
 						"type": "DatasetReference"
 					},
 					"name": "Stage1SalesCRMSCEQCRTB"
@@ -92,12 +92,12 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "DelimitedText1",
+						"referenceName": "Invoice_Table",
 						"type": "DatasetReference"
 					},
 					"name": "sink1",
 					"rejectedDataLinkedService": {
-						"referenceName": "AzureDataLakeStorage1",
+						"referenceName": "Invoicelinkservices",
 						"type": "LinkedServiceReference"
 					}
 				}
@@ -1474,7 +1474,6 @@
 				"          ORD_EXPCT_DLVRY_DATE = BKNG_EXPCT_DLVRY_DATE,",
 				"          Order_Amt = BKNG_AMT,",
 				"          ORD_Cncl_Date = BKNG_CNCL_DATE,",
-				"          BKNG_CRTE_DTIME,",
 				"          ORD_BILL_TO_STATE = BKNG_BILL_TO_STATE,",
 				"          ORD_BILL_TO_CITY = BKNG_BILL_TO_CITY,",
 				"          TEAM_LEADER,",
@@ -1501,7 +1500,7 @@
 				"     skipDuplicateMapOutputs: true) ~> select24",
 				"select24 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     partitionFileNames:['Final_lnvoice_ETL.csv'],",
+				"     partitionFileNames:['Invoice_Table.csv'],",
 				"     umask: 0022,",
 				"     preCommands: [],",
 				"     postCommands: [],",

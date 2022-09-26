@@ -1,12 +1,16 @@
 {
-	"name": "Stage1_Sales_CRM_SDENSC_TB",
+	"name": "SalesTeamLeader",
 	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Invoicelinkservices",
+			"type": "LinkedServiceReference"
+		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "Stage1_Sales_CRM_SDENSC_TB.csv",
+				"fileName": "Sales_Team_Leader.csv",
 				"fileSystem": "inputinvoicedata"
 			},
 			"columnDelimiter": ",",
@@ -16,51 +20,43 @@
 		},
 		"schema": [
 			{
-				"name": "ENSC_CMPN_NO",
+				"name": "TEAM_LEADER",
 				"type": "String"
 			},
 			{
-				"name": "ENSC_CORP_NO",
+				"name": "TEAM_LEADER_JOINING_DATE",
 				"type": "String"
 			},
 			{
-				"name": "ENSC_GRP_CODE",
+				"name": "TEAM_LEADER_LEAVE_DATE",
 				"type": "String"
 			},
 			{
-				"name": "ENSC_CODE",
+				"name": "KEC",
 				"type": "String"
 			},
 			{
-				"name": "ENSC_GRP_NAME",
+				"name": "KEC_NAME",
 				"type": "String"
 			},
 			{
-				"name": "ENSC_NAME",
+				"name": "KEC_CODE",
 				"type": "String"
 			},
 			{
-				"name": "ENSC_PRIORITY",
+				"name": "KEC_JOIN_DATE",
 				"type": "String"
 			},
 			{
-				"name": "ENSC_DELYN",
+				"name": "KEC_LEAVE_DATE",
 				"type": "String"
 			},
 			{
-				"name": "ENSC_CRTE_EMP_NO",
+				"name": "EQRY_ENQRY_NO",
 				"type": "String"
 			},
 			{
-				"name": "ENSC_CRTE_DTIME",
-				"type": "String"
-			},
-			{
-				"name": "ENSC_UPDT_EMP_NO",
-				"type": "String"
-			},
-			{
-				"name": "ENSC_UPDT_DTIME",
+				"name": "EQRY_DLR_NO",
 				"type": "String"
 			}
 		]
