@@ -13,6 +13,31 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/DelimitedText4')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Invoicelinkservices",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileSystem": "outputinvoicedata"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/dataflow1')]",
 			"type": "Microsoft.DataFactory/factories/dataflows",
 			"apiVersion": "2018-06-01",
@@ -1543,16 +1568,16 @@
 					"sources": [
 						{
 							"dataset": {
-								"referenceName": "Invoice_Table_ETL",
+								"referenceName": "DelimitedText3",
 								"type": "DatasetReference"
 							},
-							"name": "InvoiceTableETL"
+							"name": "source1"
 						}
 					],
 					"sinks": [
 						{
 							"dataset": {
-								"referenceName": "Invoice_Table_ET",
+								"referenceName": "DelimitedText4",
 								"type": "DatasetReference"
 							},
 							"name": "sink1",
@@ -1597,7 +1622,7 @@
 						"          Lead_Status as string,",
 						"          Lead_Category_Type as string,",
 						"          Lead_QTY as integer,",
-						"          Delivery_Date as string,",
+						"          Delivery_Date as date,",
 						"          Lead_Source_Type as string,",
 						"          ORD_HYPO_NAME as string,",
 						"          Price as float,",
@@ -1606,10 +1631,10 @@
 						"     ),",
 						"     allowSchemaDrift: true,",
 						"     validateSchema: false,",
-						"     ignoreNoFilesFound: false) ~> InvoiceTableETL",
-						"InvoiceTableETL sink(allowSchemaDrift: true,",
+						"     ignoreNoFilesFound: false) ~> source1",
+						"source1 sink(allowSchemaDrift: true,",
 						"     validateSchema: false,",
-						"     partitionFileNames:['InvoiceTableETL.csv'],",
+						"     partitionFileNames:['InvoiceTable.csv'],",
 						"     umask: 0022,",
 						"     preCommands: [],",
 						"     postCommands: [],",
@@ -1619,7 +1644,9 @@
 					]
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/DelimitedText4')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/pipeline1')]",
@@ -1703,7 +1730,7 @@
 								"type": "DataFlowReference",
 								"parameters": {},
 								"datasetParameters": {
-									"InvoiceTableETL": {},
+									"source1": {},
 									"sink1": {}
 								}
 							},
