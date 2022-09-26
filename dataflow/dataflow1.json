@@ -92,7 +92,7 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "FinalInvoiceETL",
+						"referenceName": "DelimitedText1",
 						"type": "DatasetReference"
 					},
 					"name": "sink1",
